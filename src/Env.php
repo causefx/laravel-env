@@ -152,11 +152,10 @@ class Env
      */
     private function _prepareValue(string $value): string
     {
-        if (false !== strpos($value, ' ') || (strlen($value) && in_array($value[0], ['=', '$']))) {
-            $value = '"' . $value . '"';
-        }
-
-        return $this->_preg_quote_except($value, ':.-');
+        // Set quotes around string no matter how it was before
+        $value = '"' . $value . '"';
+        
+        return $this->_preg_quote_except($value, ":!@#$%&*()-'+=^.");
     }
 
     private function _stripQuotes(string $value): string
